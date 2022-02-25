@@ -1,0 +1,50 @@
+﻿<Window x:Class="VP_Felho.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VP_Felho.Views"
+        xmlns:vm="clr-namespace:VP_Felho.ViewModels"
+        mc:Ignorable="d"
+        Title="Bejelentkezés" Height="300" Width="500">
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Height" Value="23" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TextBlock Text="VP-Felhő" FontSize="18" Margin="10,10,0,0" />
+        <TextBlock Text="Felhasználónév" Margin="50,50,0,0" />
+        <TextBox x:Name="txtUsername" Text="{Binding Username}"
+            Height="23" Width="250" 
+            Margin="150,50,0,0" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Text="Jelszó"
+            Height="23"
+            Margin="50,100,0,0" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <PasswordBox x:Name="pwdBox"
+            PasswordChar="*" PasswordChanged="PasswordBox_PasswordChanged"  
+            Height="23" Width="250"
+            Margin="150,100,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top">
+            <PasswordBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+            </PasswordBox.InputBindings>
+        </PasswordBox>
+        <TextBlock Text="{Binding ErrorMessage}"
+            Height="23" Width="250" 
+            Margin="150,150,0,0" 
+            HorizontalAlignment="Left" 
+            Foreground="Red" />
+        <Button Content="Bejelentkezés" Command="{Binding LoginCommand}"
+                Height="23" Width="100"
+                Margin="150,200,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" />
+    </Grid>
+</Window>
