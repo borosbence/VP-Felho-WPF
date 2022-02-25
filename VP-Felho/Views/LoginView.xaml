@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VP_Felho.Views"
         xmlns:vm="clr-namespace:VP_Felho.ViewModels"
-        mc:Ignorable="d"
-        Title="Bejelentkezés" Height="300" Width="500">
+        mc:Ignorable="d" 
+        Title="Bejelentkezés" Height="300" Width="500" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:LoginViewModel/>
     </Window.DataContext>
