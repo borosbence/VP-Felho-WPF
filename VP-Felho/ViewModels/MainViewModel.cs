@@ -24,7 +24,10 @@ namespace VP_Felho.ViewModels
         public Fajl SelectedFajl
         {
             get { return _selectedFajl; }
-            set { SetProperty(ref _selectedFajl, value); DisplayCommand.NotifyCanExecuteChanged(); }
+            set { SetProperty(ref _selectedFajl, value); 
+                DisplayCommand.NotifyCanExecuteChanged();
+                RemoveCommand.NotifyCanExecuteChanged();
+            }
         }
 
         public RelayCommand DisplayCommand { get; set; }
@@ -38,8 +41,14 @@ namespace VP_Felho.ViewModels
             Fajlok = new ObservableCollection<Fajl>(_repo.GetAll());
             DisplayCommand = new RelayCommand(() => Display(), () => CanDisplay());
             UploadCommand = new RelayCommand<Fajl>(fajl => AddItem(fajl));
-            RemoveCommand = new RelayCommand(() => RemoveItem());
+            RemoveCommand = new RelayCommand(() => RemoveItem(), () => CanRemove());
             LogoutCommand = new RelayCommand<Window>(e => Close(e));
+        }
+
+        private void AddItem(Fajl fajl)
+        {
+            _repo.Insert(fajl);
+            Fajlok.Insert(0, fajl);
         }
 
         private void Display()
@@ -59,10 +68,9 @@ namespace VP_Felho.ViewModels
             return imageExtensions.Contains(SelectedFajl.kiterjesztes.ToLower());
         }
 
-        private void AddItem(Fajl fajl)
+        private bool CanRemove()
         {
-            _repo.Insert(fajl);
-            Fajlok.Insert(0, fajl);
+            return SelectedFajl != null;
         }
 
         private void RemoveItem()
