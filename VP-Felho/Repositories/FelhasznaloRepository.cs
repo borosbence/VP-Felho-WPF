@@ -15,7 +15,7 @@ namespace VP_Felho.Repositories
         private felhoContext _context;
         public FelhasznaloRepository(felhoContext context)
         {
-            _context = new felhoContext();
+            _context = context;
         }
 
         public string Authenticate(string username, string password)
